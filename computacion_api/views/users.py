@@ -35,7 +35,7 @@ class AdminAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         admin = Administradores.objects.filter(user__is_active = 1).order_by("id")
-        lista = AdminSerializer(admin, many=True).data
+        lista = UserSerializer(admin, many=True).data
         
         return Response(lista, 200)
 
@@ -44,7 +44,7 @@ class AdminView(generics.CreateAPIView):
     # permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         admin = get_object_or_404(Administradores, id = request.GET.get("id"))
-        admin = AdminSerializer(admin, many=False).data
+        admin = UserSerializer(admin, many=False).data
 
         return Response(admin, 200)
     
