@@ -86,9 +86,7 @@ class MaestroView(generics.CreateAPIView):
                                             rfc= request.data["rfc"].upper(),
                                             cubiculo= request.data["cubiculo"].upper(),
                                             area_investigacion= request.data["area_investigacion"],
-                                            born_date= request.data["born_date"],
-                                            edad= request.data["edad"],
-                                            ocupacion= request.data["ocupacion"]
+                                            born_date= request.data["born_date"].split("T")[0],
                                             )
             maestro.save()
 

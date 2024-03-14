@@ -12,14 +12,20 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id','first_name','last_name', 'email')
 
-class ProfilesSerializer(serializers.ModelSerializer):
+class AdminSerializer(serializers.ModelSerializer):
     user=UserSerializer(read_only=True)
     class Meta:
         model = Administradores
-        fields = "__all__"
-class ProfilesAllSerializer(serializers.ModelSerializer):
-    #user=UserSerializer(read_only=True)
-    class Meta:
-        model = Administradores
         fields = '__all__'
-        depth = 1
+
+class AlumnoSerializer(serializers.ModelSerializer):
+    user=UserSerializer(read_only=True)
+    class Meta:
+        model = Alumnos
+        fields = "__all__"
+
+class MaestroSerializer(serializers.ModelSerializer):
+    user=UserSerializer(read_only=True)
+    class Meta:
+        model = Maestros
+        fields = '__all__'

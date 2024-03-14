@@ -44,11 +44,9 @@ class Maestros(models.Model):
     clave_maestro = models.CharField(max_length=255,null=True, blank=True)
     born_date = models.DateField(null=True, blank=True)
     rfc = models.CharField(max_length=255,null=True, blank=True)
-    edad = models.IntegerField(null=True, blank=True)
     telefono = models.CharField(max_length=255, null=True, blank=True)
     cubiculo = models.CharField(max_length=255, null=True, blank=True)
     area_investigacion = models.CharField(max_length=255, null=True, blank=True)
-    ocupacion = models.CharField(max_length=255,null=True, blank=True)
     creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     update = models.DateTimeField(null=True, blank=True)
 
