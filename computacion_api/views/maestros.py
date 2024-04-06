@@ -35,7 +35,7 @@ class MaestrosAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         maestro = Maestros.objects.filter(user__is_active = 1).order_by("id")
-        lista = UserSerializer(maestro, many=True).data
+        lista = MaestroSerializer(maestro, many=True).data
         
         return Response(lista, 200)
 
@@ -87,6 +87,7 @@ class MaestroView(generics.CreateAPIView):
                                             cubiculo= request.data["cubiculo"].upper(),
                                             area_investigacion= request.data["area_investigacion"],
                                             born_date= request.data["born_date"].split("T")[0],
+                                            materias_json = json.dumps(request.data["materias_impartir"])
                                             )
             maestro.save()
 

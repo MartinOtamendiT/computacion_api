@@ -35,7 +35,7 @@ class AlumnosAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         alumno = Alumnos.objects.filter(user__is_active = 1).order_by("id")
-        lista = UserSerializer(alumno, many=True).data
+        lista = AlumnoSerializer(alumno, many=True).data
         
         return Response(lista, 200)
 
