@@ -44,30 +44,35 @@ class CustomAuthToken(ObtainAuthToken):
                 role_names.append(role.name)
             #Si solo es un rol especifico asignamos el elemento 0
             role_names = role_names[0]
+            print(role_names)
 
             token, created = Token.objects.get_or_create(user=user)
 
-            if role_names == 'alumno':
+            if role_names == 'Alumno':
                 alumno = Alumnos.objects.filter(user=user).first()
                 alumno = AlumnoSerializer(alumno).data
                 alumno["token"] = token.key
                 alumno["rol"] = "alumno"
+                print("Aquí")
                 return Response(alumno,200)
-            if role_names == 'maestro':
+            if role_names == 'Maestro':
                 maestro = Maestros.objects.filter(user=user).first()
                 maestro = MaestroSerializer(maestro).data
                 maestro["token"] = token.key
                 maestro["rol"] = "maestro"
                 return Response(maestro,200)
-            if role_names == 'administrador':
+            if role_names == 'Administrador':
                 user = UserSerializer(user, many=False).data
                 user['token'] = token.key
                 user["rol"] = "administrador"
                 return Response(user,200)
             else:
+                print("Aquí else")
+                
                 return Response({"details":"Forbidden"},403)
+            
                 pass
-
+        print("Aquí Principal")
         return Response({}, status=status.HTTP_403_FORBIDDEN)
 
 
