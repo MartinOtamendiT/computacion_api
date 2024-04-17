@@ -33,7 +33,7 @@ urlpatterns = [
     #Alumno Data
         path('lista-alumnos/', alumnos.AlumnosAll.as_view()),
     #Edit Alumno
-        #path('alumnos-edit/', alumnos.AlumnosViewEdit.as_view()),
+        path('alumnos-edit/', alumnos.AlumnosViewEdit.as_view()),
     #Create Maestro
         path('maestro/', maestros.MaestroView.as_view()),
     #Maestro Data

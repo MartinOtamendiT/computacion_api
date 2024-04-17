@@ -36,6 +36,11 @@ class MaestrosAll(generics.CreateAPIView):
     def get(self, request, *args, **kwargs):
         maestro = Maestros.objects.filter(user__is_active = 1).order_by("id")
         lista = MaestroSerializer(maestro, many=True).data
+        #Aquí convertimos los valores de nuevo a un array
+        if not lista:
+            return Response({},400)
+        for maestro in lista:
+            maestro["materias_json"] = json.loads(maestro["materias_json"])
         
         return Response(lista, 200)
 
@@ -44,8 +49,8 @@ class MaestroView(generics.CreateAPIView):
     # permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         maestro = get_object_or_404(Maestros, id = request.GET.get("id"))
-        maestro = UserSerializer(maestro, many=False).data
-
+        maestro = MaestroSerializer(maestro, many=False).data
+        maestro["materias_json"] = json.loads(maestro["materias_json"])
         return Response(maestro, 200)
     
     #Registrar nuevo usuario
@@ -101,12 +106,13 @@ class MaestrosViewEdit(generics.CreateAPIView):
     def put(self, request, *args, **kwargs):
         # iduser=request.data["id"]
         maestro = get_object_or_404(Maestros, id=request.data["id"])
-        maestro.id_trabajador = request.data["id_trabajador"]
-        maestro.fecha_nacimiento = request.data["fecha_nacimiento"]
+        maestro.clave_maestro = request.data["clave_maestro"]
+        maestro.born_date = request.data["born_date"]
         maestro.telefono = request.data["telefono"]
         maestro.rfc = request.data["rfc"]
         maestro.cubiculo = request.data["cubiculo"]
         maestro.area_investigacion = request.data["area_investigacion"]
+        print(request.data["materias_json"])
         maestro.materias_json = json.dumps(request.data["materias_json"])
         maestro.save()
         temp = maestro.user
