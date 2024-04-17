@@ -112,8 +112,7 @@ class MaestrosViewEdit(generics.CreateAPIView):
         maestro.rfc = request.data["rfc"]
         maestro.cubiculo = request.data["cubiculo"]
         maestro.area_investigacion = request.data["area_investigacion"]
-        print(request.data["materias_json"])
-        maestro.materias_json = json.dumps(request.data["materias_json"])
+        maestro.materias_json = json.dumps(request.data["materias_impartir"])
         maestro.save()
         temp = maestro.user
         temp.first_name = request.data["first_name"]
