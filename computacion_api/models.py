@@ -53,3 +53,20 @@ class Maestros(models.Model):
 
     def __str__(self):
         return "Perfil del maestro "+self.first_name+" "+self.last_name
+
+class Materias(models.Model):
+    NRC = models.BigAutoField(primary_key=True)
+    nombre_materia = models.CharField(max_length=255,null=True, blank=True)
+    seccion = models.CharField(max_length=255,null=True, blank=True)
+    lun = models.BooleanField(null=True, blank=True)
+    mar = models.BooleanField(null=True, blank=True)
+    mie = models.BooleanField(null=True, blank=True)
+    jue = models.BooleanField(null=True, blank=True)
+    vie = models.BooleanField(null=True, blank=True)
+    sab = models.BooleanField(null=True, blank=True)
+    horario = models.CharField(max_length=255,null=True, blank=True)
+    salon = models.CharField(max_length=255, null=True, blank=True)
+    programa_educativo = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return "Materia "+self.NRC+" - "+self.nombre_materia
