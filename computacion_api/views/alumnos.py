@@ -36,6 +36,9 @@ class AlumnosAll(generics.CreateAPIView):
     def get(self, request, *args, **kwargs):
         alumno = Alumnos.objects.filter(user__is_active = 1).order_by("id")
         lista = AlumnoSerializer(alumno, many=True).data
+
+        if not lista:
+            return Response({},400)
         
         return Response(lista, 200)
 

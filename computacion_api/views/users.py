@@ -37,6 +37,9 @@ class AdminAll(generics.CreateAPIView):
         admin = Administradores.objects.filter(user__is_active = 1).order_by("id")
         lista = AdminSerializer(admin, many=True).data
         
+        if not lista:
+            return Response({},400)
+        
         return Response(lista, 200)
 
 class AdminView(generics.CreateAPIView):
@@ -106,13 +109,13 @@ class AdminsViewEdit(generics.CreateAPIView):
         #Obtener total de maestros
         maestros = Maestros.objects.filter(user__is_active = 1).order_by("id")
         lista_maestros = MaestroSerializer(maestros, many=True).data
-        #Aquí convertimos los valores de nuevo a un array
-        if not lista_maestros:
-            return Response({},400)
-        for maestro in lista_maestros:
-            maestro["materias_json"] = json.loads(maestro["materias_json"])
-
         total_maestros = len(lista_maestros)
+        #Aquí convertimos los valores de nuevo a un array
+        # if not lista_maestros:
+        #     return Response({},400)
+        # for maestro in lista_maestros:
+        #     maestro["materias_json"] = json.loads(maestro["materias_json"])
+
 
         #Obtener total de alumnos
         alumnos = Alumnos.objects.filter(user__is_active = 1).order_by("id")
