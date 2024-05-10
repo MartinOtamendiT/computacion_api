@@ -55,7 +55,8 @@ class Maestros(models.Model):
         return "Perfil del maestro "+self.first_name+" "+self.last_name
 
 class Materias(models.Model):
-    NRC = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(primary_key=True)
+    NRC = models.IntegerField(null=True, blank=True)
     nombre_materia = models.CharField(max_length=255,null=True, blank=True)
     seccion = models.CharField(max_length=255,null=True, blank=True)
     lun = models.BooleanField(null=True, blank=True)

@@ -42,6 +42,10 @@ urlpatterns = [
         path('maestros-edit/', maestros.MaestrosViewEdit.as_view()),
     #Create Materia
         path('materia/', materias.MateriasView.as_view()),
+    #Materia Data
+        path('lista-materias/', materias.MateriasAll.as_view()),
+    #Edit Materia
+        path('materias-edit/', materias.MateriasViewEdit.as_view()),
     #Login
         path('token/', auth.CustomAuthToken.as_view()),
     #Logout
