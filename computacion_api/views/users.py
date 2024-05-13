@@ -38,7 +38,7 @@ class AdminAll(generics.CreateAPIView):
         lista = AdminSerializer(admin, many=True).data
         
         if not lista:
-            return Response({},400)
+            return Response({},200)
         
         return Response(lista, 200)
 

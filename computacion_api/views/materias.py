@@ -39,7 +39,7 @@ class MateriasAll(generics.CreateAPIView):
         lista = MateriaSerializer(materia, many=True).data
         #Aquí convertimos los valores de nuevo a un array
         if not lista:
-            return Response({},400)
+            return Response({},200)
         
         return Response(lista, 200)
     
