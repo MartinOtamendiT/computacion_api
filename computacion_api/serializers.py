@@ -36,7 +36,9 @@ class MateriaSerializer(serializers.ModelSerializer):
     nombre_materia = serializers.CharField(required=True)
     seccion = serializers.CharField(required=True)
     programa_educativo = serializers.CharField(required=True)
-
+    dias_materia = serializers.CharField(required=True)
+    horario = serializers.CharField(required=True)
+    salon = serializers.CharField(required=True)
     class Meta:
         model = Materias
-        fields = ('id','NRC','nombre_materia','seccion', 'programa_educativo')
+        fields = ('id','NRC','nombre_materia','seccion', 'programa_educativo', 'dias_materia', 'horario', 'salon')
