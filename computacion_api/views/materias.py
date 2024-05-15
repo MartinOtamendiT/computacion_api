@@ -32,7 +32,7 @@ import json
 
 class MateriasAll(generics.CreateAPIView):
     #Esta linea se usa para pedir el token de autenticación de inicio de sesión
-    #permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, *args, **kwargs):
         # materia = Materias.objects.filter(user__is_active = 1).order_by("NRC")
         materia = Materias.objects.filter().order_by("id")
@@ -65,12 +65,6 @@ class MateriasView(generics.CreateAPIView):
         NRC = request.data['nrc']
         nombre_materia = request.data['nombre_materia']
         seccion = request.data['seccion']
-        # lun=request.data['lun']
-        # mar=request.data['mar']
-        # mie=request.data['mie']
-        # jue=request.data['jue']
-        # vie=request.data['vie']
-        # sab=request.data['sab']
         horario = f"{request.data['horario_inicio']}-{request.data['horario_fin']}"
         salon = request.data['salon']
         programa_educativo = request.data['programa_educativo']
@@ -83,12 +77,6 @@ class MateriasView(generics.CreateAPIView):
         materia = Materias.objects.create( NRC = NRC,
                             nombre_materia = nombre_materia,
                             seccion = seccion,
-                            # lun=lun,
-                            # mar=mar,
-                            # mie=mie,
-                            # jue=jue,
-                            # vie=vie,
-                            # sab=sab,
                             horario = horario,
                             salon = salon,
                             programa_educativo = programa_educativo,
@@ -102,19 +90,13 @@ class MateriasView(generics.CreateAPIView):
         return Response(materia.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MateriasViewEdit(generics.CreateAPIView):
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
     def put(self, request, *args, **kwargs):
         materia = get_object_or_404(Materias, id=request.data["id"])
         materia.NRC = request.data['nrc']
         materia.nombre_materia = request.data['nombre_materia']
         materia.seccion = request.data['seccion']
-        # materia.lun=request.data['lun']
-        # materia.mar=request.data['mar']
-        # materia.mie=request.data['mie']
-        # materia.jue=request.data['jue']
-        # materia.vie=request.data['vie']
-        # materia.sab=request.data['sab']
-        materia.horario = request.data['horario']
+        materia.horario = f"{request.data['horario_inicio']}-{request.data['horario_fin']}"
         materia.salon = request.data['salon']
         materia.programa_educativo = request.data['programa_educativo']
         materia.dias_materia = json.dumps(request.data["dias_materia"])
